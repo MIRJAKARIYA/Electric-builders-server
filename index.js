@@ -32,10 +32,20 @@ const verifyToken = (req, res, next) => {
   });
 };
 
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.gnzth.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
 const run = async () => {
   try {
+    await client.connect();
 
-
+    //tools collection
+    const toolsCollection = client.db("toolManufacturer").collection("tools");
+    //users collection
+    const userCollection = client.db("toolManufacturer").collection("users");
+    //purchased collection
+    const purchasedCollection = client.db("toolManufacturer").collection("purchased");
 
     //login with JWT
     app.post("/getToken", async (req, res) => {

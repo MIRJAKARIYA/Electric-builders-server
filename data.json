@@ -1,0 +1,82 @@
+[
+  {
+    "toolName": "Insulated screwdriver",
+    "img": "https://i.ibb.co/Qry4f58/Insulated-screwdriver.jpg",
+    "description": "Screwdrivers are one of the most traditional of tools but are still indispensable for most electricians who frequently require access to electrical containers sealed with screws. There are multiple sizes and shapes available for compatibility with the abundance of screw designs.",
+    "minimumOrderQuantity": 1000,
+    "availableQuantity": 10000,
+    "price": 80
+  },
+  {
+    "toolName": "Insulated plier",
+    "img": "https://i.ibb.co/820p4QS/Insulated-plier.jpg",
+    "description": "Pliers are another tool that has been with us for a long time. Their versatility means they can be used to accomplish a multitude of tasks requiring ‘torque’, working in a much more robust manner than would be possible with the use of bare hands alone.",
+    "minimumOrderQuantity": 1000,
+    "availableQuantity": 500,
+    "price": 90
+  },
+  {
+    "toolName": "Torch",
+    "img": "https://i.ibb.co/3rgC3qy/torch.jpg",
+    "description": "Torches are common item that are always handy to keep in the tool kits of electricians and other professionals. Many different designs are available but smaller torches powered by LEDs rather than traditional bulbs are typically favoured by professionals: they are lighter and easier to carry without sacrificing illumination.",
+    "minimumOrderQuantity": 100,
+    "availableQuantity": 1000,
+    "price": 100
+  },
+  {
+    "toolName": "Claw Hammer",
+    "img": "https://i.ibb.co/3SdkxNH/Claw-Hammer.jpg",
+    "description": "Claw hammers feature a standard hammer on one side of the tool, primarily used for inserting fixtures like nails, and a dual steel claw at the other end, which is designed to enable the easy removal of the same nails or similar fixtures by applying a robust grip.",
+    "minimumOrderQuantity": 1500,
+    "availableQuantity": 15000,
+    "price": 30
+  },
+  {
+    "toolName": "Voltage tester",
+    "img": "https://i.ibb.co/RTGVd1j/Voltage-tester.jpg",
+    "description": "These are another toolkit standby with a relatively self-explanatory name. Voltage indicators, or ‘multimeters’, are handheld devices used for – you guessed it – testing whether a live current is present in a particular location. They are primarily employed for safety purposes when checking cabling, switches, junction boxes or similar equipment.",
+    "minimumOrderQuantity": 1000,
+    "availableQuantity": 20000,
+    "price": 50
+  },
+  {
+    "toolName": "Cable cutter",
+    "img": "https://i.ibb.co/4Vp4v4b/Cable-cutter.jpg",
+    "description": "Cable cutters are a staple of every electrician’s tool kit. These versatile tools feature steel blades and cut through standard wiring easily. Stronger cable shears will make short work of even thicker cabling. They also provide a handy way to strip off insulation for crimping and similar operations quickly.",
+    "minimumOrderQuantity": 3000,
+    "availableQuantity": 25000,
+    "price": 20
+  },
+  {
+    "toolName": "Electrical tape",
+    "img": "https://i.ibb.co/N9PwtCC/Electrical-tape.jpg",
+    "description": "Electrical tape is used to insulate wires or other items that conduct electricity. Also known as insulation tape or electrical insulation tape, it is self-adhesive and pressure-sensitive, built to resist abrasion, heat and liquids in order to protect the sensitive conducting core within electrical wiring.",
+    "minimumOrderQuantity": 5000,
+    "availableQuantity": 50000,
+    "price": 10
+  },
+  {
+    "toolName": "Wire stripper",
+    "img": "https://i.ibb.co/pyHGWFJ/Wire-strippers.jpg",
+    "description": "Wire strippers are plier-like tools used to remove the insulating outer sheath from cables in order to attach terminals or connectors to the central core via crimping or soldering. Some strippers also allow electricians to cut right through the copper or conduit in a wire or cable.",
+    "minimumOrderQuantity": 2500,
+    "availableQuantity": 20000,
+    "price": 25
+  },
+  {
+    "toolName": "Multimeter",
+    "img": "https://i.ibb.co/2nmrnvC/multimeter.jpg",
+    "description": "A multimeter is a measuring instrument that can measure multiple electrical properties. A typical multimeter can measure voltage, resistance, and current, in which case it is also known as a volt-ohm-milliammeter (VOM), as the unit is equipped with voltmeter, ammeter, and ohmmeter functionality.",
+    "minimumOrderQuantity": 1000,
+    "availableQuantity": 5000,
+    "price": 70
+  },
+  {
+    "toolName": "Hacksaw",
+    "img": "https://i.ibb.co/0nt5Z0p/Hacksaws.jpg",
+    "description": "Hacksaws are fine-toothed saws designed primarily for cutting through metal. The thin blades are held at tension in an adjustable frame, between the head of the saw and the pistol grip handle. These blades can break or become blunt but are easily replaceable.",
+    "minimumOrderQuantity": 4000,
+    "availableQuantity": 30000,
+    "price": 15
+  }
+]
