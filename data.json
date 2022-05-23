@@ -10,7 +10,7 @@
   {
     "toolName": "Insulated plier",
     "img": "https://i.ibb.co/820p4QS/Insulated-plier.jpg",
-    "description": "Pliers are another tool that has been with us for a long time. Their versatility means they can be used to accomplish a multitude of tasks requiring ‘torque’, working in a much more robust manner than would be possible with the use of bare hands alone.",
+    "description": "Pliers are another tool that has been with us for a long time. Their versatility means they can be used to accomplish a multitude of tasks requiring torque, working in a much more robust manner than would be possible with the use of bare hands alone.",
     "minimumOrderQuantity": 1000,
     "availableQuantity": 500,
     "price": 90
@@ -34,7 +34,7 @@
   {
     "toolName": "Voltage tester",
     "img": "https://i.ibb.co/RTGVd1j/Voltage-tester.jpg",
-    "description": "These are another toolkit standby with a relatively self-explanatory name. Voltage indicators, or ‘multimeters’, are handheld devices used for – you guessed it – testing whether a live current is present in a particular location. They are primarily employed for safety purposes when checking cabling, switches, junction boxes or similar equipment.",
+    "description": "These are another toolkit standby with a relatively self-explanatory name. Voltage indicators, or multimeters, are handheld devices used for you guessed it testing whether a live current is present in a particular location. They are primarily employed for safety purposes when checking cabling, switches, junction boxes or similar equipment.",
     "minimumOrderQuantity": 1000,
     "availableQuantity": 20000,
     "price": 50
@@ -78,5 +78,21 @@
     "minimumOrderQuantity": 4000,
     "availableQuantity": 30000,
     "price": 15
+  },
+  {
+    "toolName": "Current transformer",
+    "img": "https://i.ibb.co/tZtq4MX/current-tranformer.jpg",
+    "description":"Current transformers, along with voltage or potential transformers, are instrument transformers. Instrument transformers scale the large values of voltage or current to small, standardized values that are easy to handle for measuring instruments and protective relays.",
+    "minimumOrderQuantity": 100,
+    "availableQuantity": 3000,
+    "price": 1500
+  },
+  {
+    "toolName": "Nail gun",
+    "img": "https://i.ibb.co/3YD4334/nail-gun.jpg",
+    "description":"A nail gun, nailgun or nailer is a form of hammer used to drive nails into wood or other materials. It is usually driven by compressed air, electromagnetism, highly flammable gases such as butane or propane, or, for powder-actuated tools, a small explosive charge. Nail guns have in many ways replaced hammers as tools of choice among builders.",
+    "minimumOrderQuantity": 100,
+    "availableQuantity": 3000,
+    "price": 1500
   }
 ]
