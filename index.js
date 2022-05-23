@@ -3,7 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const { MongoClient, ServerApiVersion, ObjectId, Db } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -75,7 +75,21 @@ const run = async () => {
       }
     });
 
- 
+    
+    //get all tools
+    app.get('/getTools', async(req, res)=>{
+      const query = {};
+      const tools = await toolsCollection.find(query).toArray();
+      res.send(tools);
+    })
+
+    //get specific tool by id
+    app.get('/getTool/:toolId', async(req, res)=>{
+      const id = req.params.toolId;
+      const query = {_id:ObjectId(id)};
+      const tool = await toolsCollection.findOne(query);
+      res.send(tool)
+    })
 
 
 
