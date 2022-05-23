@@ -91,6 +91,13 @@ const run = async () => {
       res.send(tool)
     })
 
+    //post data to purchased
+    app.post('/purchased', async(req, res)=>{
+      const toolData = req.body;
+      const result = await purchasedCollection.insertOne(toolData);
+      res.send(result)
+    })
+
 
 
 
