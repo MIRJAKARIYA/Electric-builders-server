@@ -114,7 +114,21 @@ const run = async () => {
       const purchasedProduct = await purchasedCollection.findOne(query);
       res.send(purchasedProduct);
     })
+    //patch transaction id to purchased product
+    app.patch('/purchasedSingle/:productId', async(req, res)=>{
+      const id = req.params.productId;
+      const transaction = req.body;
+      const filter = {_id:ObjectId(id)};
+      const updatedDoc = {
+        $set:{
+          status: 'paid',
+          transactionId:transaction.transactionId
+        }
+      }
 
+      const result = await purchasedCollection.updateOne(filter, updatedDoc);
+      res.send(result)
+    })
 
 
 
