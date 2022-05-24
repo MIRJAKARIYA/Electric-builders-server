@@ -91,14 +91,29 @@ const run = async () => {
       res.send(tool)
     })
 
-    //post data to purchased
+    //post data to purchased collection
     app.post('/purchased', async(req, res)=>{
       const toolData = req.body;
       const result = await purchasedCollection.insertOne(toolData);
       res.send(result)
     })
 
+    //get data from purchased collection
+    app.get('/purchased', async(req, res)=>{
+      const query = req.query;
+      console.log(query)
+      const result = await purchasedCollection.find(query).toArray();
+      console.log(result)
+      res.send(result)
+    })
 
+    //get single purchased product
+    app.get('/purchasedSingle/:productId', async(req, res)=>{
+      const id = req.params.productId;
+      const query = {_id:ObjectId(id)};
+      const purchasedProduct = await purchasedCollection.findOne(query);
+      res.send(purchasedProduct);
+    })
 
 
 
