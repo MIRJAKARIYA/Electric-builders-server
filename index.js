@@ -46,7 +46,10 @@ const run = async () => {
     const userCollection = client.db("toolManufacturer").collection("users");
     //purchased collection
     const purchasedCollection = client.db("toolManufacturer").collection("purchased");
-
+    //review collection
+    const reviewCollection = client.db("toolManufacturer").collection("review");
+    
+    
     //login with JWT
     app.post("/getToken", async (req, res) => {
       const user = req.body.email;
@@ -103,7 +106,6 @@ const run = async () => {
       const query = req.query;
       console.log(query)
       const result = await purchasedCollection.find(query).toArray();
-      console.log(result)
       res.send(result)
     })
 
@@ -122,12 +124,35 @@ const run = async () => {
       const updatedDoc = {
         $set:{
           status: 'paid',
-          transactionId:transaction.transactionId
+          transactionId:transaction.transactionId,
+          delivery: transaction.delivery
         }
       }
-
       const result = await purchasedCollection.updateOne(filter, updatedDoc);
       res.send(result)
+    })
+
+    //delete purchased product
+    app.delete('/purchasedSingle/:productId',async(req, res)=>{
+      const id = req.params.productId;
+      const query = {_id:ObjectId(id)};
+      const result = await purchasedCollection.deleteOne(query);
+      res.send(result)
+    })
+
+    //post data to review collection
+    app.post('/review', async(req, res)=>{
+      const data = req.body;
+      const result = await reviewCollection.insertOne(data);
+      res.send(result);
+    })
+
+    //get all reviews
+    app.get('/review', async(req, res)=>{
+      const query = {};
+      const reviews = await reviewCollection.find(query).toArray();
+      const reversedReviews = reviews.reverse();
+      res.send(reversedReviews);
     })
 
 
