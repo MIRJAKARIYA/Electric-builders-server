@@ -240,6 +240,13 @@ const run = async () => {
       const reviews = await reviewCollection.find(query).toArray();
       const reversedReviews = reviews.reverse();
       res.send(reversedReviews);
+    });
+
+    //get all users
+    app.get('/allUsers', async(req, res)=>{
+      const query = {};
+      const users = await userCollection.find(query).toArray();
+      res.send(users)
     })
 
 
