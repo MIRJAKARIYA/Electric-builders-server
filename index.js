@@ -49,23 +49,44 @@ const run = async () => {
     //review collection
     const reviewCollection = client.db("toolManufacturer").collection("review");
     
-    
-    //login with JWT
-    app.post("/getToken", async (req, res) => {
-      const user = req.body.email;
-      const payload = { email: user };
-      const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "1d",
-      });
-      res.send({ accessToken });
-    });
+  
+    //login or signup and get jwt
+    app.patch('/user/:email', async(req, res)=>{
+      const email = req.params.email;
+      const user = req.body
+      const filter = {email:email};
+      const options = {upsert:true};
+      const updateDoc = {
+        $set:user
+      };
+      const result = await userCollection.updateOne(filter,updateDoc,options);
+      const token = jwt.sign({email:email},process.env.ACCESS_TOKEN_SECRET,{expiresIn:'1d'})
+      res.send({result,token});
+    })
+
+    //get specific user
+    app.get('/user',async(req, res)=>{
+      const query = req.query
+      const user = await userCollection.findOne(query);
+      res.send(user);      
+    })
+    //update specific profile data
+    app.patch('/profile/:profileId', async(req, res)=>{
+      const id = req.params.profileId;
+      const data = req.body;
+      const filter = {_id:ObjectId(id)};
+      const updateDoc = {
+        $set:data
+      };
+      const result = await userCollection.updateOne(filter,updateDoc);
+      res.send(result)
+    })
 
     //stripe api
     app.post("/create-payment-intent", async (req, res) => {
       const product = req.body;
       const price = product.price;
       const amount = price * 100;
-      console.log(amount);
       if (!isNaN(amount)) {
         const paymentIntent = await stripe.paymentIntents.create({
           amount: amount,
@@ -104,7 +125,6 @@ const run = async () => {
     //get data from purchased collection
     app.get('/purchased', async(req, res)=>{
       const query = req.query;
-      console.log(query)
       const result = await purchasedCollection.find(query).toArray();
       res.send(result)
     })
