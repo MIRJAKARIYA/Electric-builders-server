@@ -114,6 +114,21 @@ const run = async () => {
       const tool = await toolsCollection.findOne(query);
       res.send(tool)
     })
+    //update tool fields
+    app.patch('/updateTool/:toolId', async(req, res)=>{
+      const id = req.params.toolId;
+      const data = req.body;
+      const filter = {_id:ObjectId(id)};
+      const updatedDoc = {
+        $set:{
+          availableQuantity:parseInt(data.availableQuantity),
+          minimumOrderQuantity:parseInt(data.minimumOrderQuantity),
+          price:parseInt(data.price)
+        }
+      }
+      const result = await toolsCollection.updateOne(filter, updatedDoc);
+      res.send(result);
+    })
     //add tool
     app.post('/addTool', async(req, res)=>{
       const toolData = req.body;
