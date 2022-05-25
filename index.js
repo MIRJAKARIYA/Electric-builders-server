@@ -137,6 +137,13 @@ const run = async () => {
       res.send(result)
 
     })
+    //delete tool
+    app.delete('/deleteTool/:toolId', async(req, res)=>{
+      const id = req.params.toolId;
+      const query = {_id:ObjectId(id)};
+      const result = await toolsCollection.deleteOne(query);
+      res.send(result);
+    })
     //update tool quantity
     app.patch('/getTool', async(req, res)=>{
       const query = req.query;
