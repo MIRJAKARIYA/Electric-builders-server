@@ -114,6 +114,30 @@ const run = async () => {
       const tool = await toolsCollection.findOne(query);
       res.send(tool)
     })
+    //update tool quantity
+    app.patch('/getTool', async(req, res)=>{
+      const query = req.query;
+      const quan = req.body.quantity;
+      const tool = await toolsCollection.findOne(query);
+      const newQuantity = parseInt(tool.availableQuantity) - parseInt(quan);
+      console.log(tool)
+      const filter = query;
+      const updatedDoc = {
+        $set:{
+          availableQuantity:newQuantity
+        }
+      }
+      const result = await toolsCollection.updateOne(filter, updatedDoc);
+      res.send(result)
+    })
+
+    //delete order by admin
+    app.delete('/deletOrder/:deleteId', async(req, res)=>{
+      const id = req.params.deleteId;
+      const query = {_id:ObjectId(id)};
+      const result = await purchasedCollection.deleteOne(query);
+      res.send(result);
+    })
 
     //post data to purchased collection
     app.post('/purchased', async(req, res)=>{
@@ -146,6 +170,18 @@ const run = async () => {
           status: 'paid',
           transactionId:transaction.transactionId,
           delivery: transaction.delivery
+        }
+      }
+      const result = await purchasedCollection.updateOne(filter, updatedDoc);
+      res.send(result)
+    })
+    app.patch('/deliverConfirm/:deliverId', async(req, res)=>{
+      const id = req.params.deliverId;
+      const data = req.body.delivery;
+      const filter = {_id:ObjectId(id)};
+      const updatedDoc = {
+        $set:{
+          delivery:data
         }
       }
       const result = await purchasedCollection.updateOne(filter, updatedDoc);
