@@ -114,6 +114,14 @@ const run = async () => {
       const tool = await toolsCollection.findOne(query);
       res.send(tool)
     })
+    //add tool
+    app.post('/addTool', async(req, res)=>{
+      const toolData = req.body;
+      console.log(toolData)
+      const result = await toolsCollection.insertOne(toolData);
+      res.send(result)
+
+    })
     //update tool quantity
     app.patch('/getTool', async(req, res)=>{
       const query = req.query;
@@ -130,6 +138,7 @@ const run = async () => {
       const result = await toolsCollection.updateOne(filter, updatedDoc);
       res.send(result)
     })
+
 
     //delete order by admin
     app.delete('/deletOrder/:deleteId', async(req, res)=>{
