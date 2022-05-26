@@ -67,7 +67,6 @@ const run = async () => {
           const email = req.params.email;
           const user = await userCollection.findOne({email:email});
           const isAdmin = user.role === 'admin';
-          console.log(isAdmin)
           res.send({admin:isAdmin});
         })
 
@@ -78,7 +77,6 @@ const run = async () => {
     app.patch('/user/:email', async(req, res)=>{
       const email = req.params.email;
       const user = req.body
-      console.log(user)
       const filter = {email:email};
       const options = {upsert:true};
       const updateDoc = {
@@ -175,7 +173,6 @@ const run = async () => {
     //add tool
     app.post('/addTool',verifyToken,verifyAdmin, async(req, res)=>{
       const toolData = req.body;
-      console.log(toolData)
       const result = await toolsCollection.insertOne(toolData);
       res.send(result)
 
@@ -193,7 +190,6 @@ const run = async () => {
       const quan = req.body.quantity;
       const tool = await toolsCollection.findOne(query);
       const newQuantity = parseInt(tool.availableQuantity) - parseInt(quan);
-      console.log(tool)
       const filter = query;
       const updatedDoc = {
         $set:{
