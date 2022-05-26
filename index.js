@@ -226,6 +226,11 @@ const run = async () => {
       const result = await purchasedCollection.find(query).toArray();
       res.send(result)
     })
+    app.get('/adminPurchased',verifyToken,verifyAdmin, async(req, res)=>{
+      const query = req.query;
+      const result = await purchasedCollection.find(query).toArray();
+      res.send(result)
+    })
 
     //get single purchased product
     app.get('/purchasedSingle/:productId', async(req, res)=>{
