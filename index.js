@@ -136,17 +136,14 @@ const run = async () => {
     });
 
 
-
-
- 
-
-
-
-
-
-    
     //get all tools
     app.get('/getTools', async(req, res)=>{
+      const query = {};
+      const tools = await toolsCollection.find(query).toArray();
+      res.send(tools);
+    })
+    //get admin tools
+    app.get('/adminGetTools',verifyToken,verifyAdmin, async(req, res)=>{
       const query = {};
       const tools = await toolsCollection.find(query).toArray();
       res.send(tools);
@@ -223,7 +220,7 @@ const run = async () => {
     })
 
     //get data from purchased collection
-    app.get('/purchased', async(req, res)=>{
+    app.get('/purchased',verifyToken, async(req, res)=>{
       const query = req.query;
       const result = await purchasedCollection.find(query).toArray();
       res.send(result)
