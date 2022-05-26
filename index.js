@@ -49,11 +49,36 @@ const run = async () => {
     //review collection
     const reviewCollection = client.db("toolManufacturer").collection("review");
     
+
+
+        //verify admin middleware
+        const verifyAdmin = async(req, res, next) =>{
+          const email = req.decoded.email;
+          const user = await userCollection.findOne({email:email});
+          if(user.role === 'admin'){
+            next()
+          }
+          else{
+            res.status(403).send({message:'forbidden'});
+          }
+        }
+    
+        app.get('/admin/:email', async(req,res)=>{
+          const email = req.params.email;
+          const user = await userCollection.findOne({email:email});
+          const isAdmin = user.role === 'admin';
+          console.log(isAdmin)
+          res.send({admin:isAdmin});
+        })
+
+
+
   
     //login or signup and get jwt
     app.patch('/user/:email', async(req, res)=>{
       const email = req.params.email;
       const user = req.body
+      console.log(user)
       const filter = {email:email};
       const options = {upsert:true};
       const updateDoc = {
@@ -71,7 +96,18 @@ const run = async () => {
       res.send(user);      
     })
     //update specific profile data
-    app.patch('/profile/:profileId', async(req, res)=>{
+    app.patch('/profile/:profileId',verifyToken, async(req, res)=>{
+      const id = req.params.profileId;
+      const data = req.body;
+      const filter = {_id:ObjectId(id)};
+      const updateDoc = {
+        $set:data
+      };
+      const result = await userCollection.updateOne(filter,updateDoc);
+      res.send(result)
+    })
+    //update profile
+    app.patch('/profiledata', async(req, res)=>{
       const id = req.params.profileId;
       const data = req.body;
       const filter = {_id:ObjectId(id)};
@@ -99,6 +135,15 @@ const run = async () => {
       }
     });
 
+
+
+
+ 
+
+
+
+
+
     
     //get all tools
     app.get('/getTools', async(req, res)=>{
@@ -115,7 +160,7 @@ const run = async () => {
       res.send(tool)
     })
     //update tool fields
-    app.patch('/updateTool/:toolId', async(req, res)=>{
+    app.patch('/updateTool/:toolId', verifyToken,verifyAdmin, async(req, res)=>{
       const id = req.params.toolId;
       const data = req.body;
       const filter = {_id:ObjectId(id)};
@@ -130,7 +175,7 @@ const run = async () => {
       res.send(result);
     })
     //add tool
-    app.post('/addTool', async(req, res)=>{
+    app.post('/addTool',verifyToken,verifyAdmin, async(req, res)=>{
       const toolData = req.body;
       console.log(toolData)
       const result = await toolsCollection.insertOne(toolData);
@@ -138,14 +183,14 @@ const run = async () => {
 
     })
     //delete tool
-    app.delete('/deleteTool/:toolId', async(req, res)=>{
+    app.delete('/deleteTool/:toolId',verifyToken,verifyAdmin, async(req, res)=>{
       const id = req.params.toolId;
       const query = {_id:ObjectId(id)};
       const result = await toolsCollection.deleteOne(query);
       res.send(result);
     })
     //update tool quantity
-    app.patch('/getTool', async(req, res)=>{
+    app.patch('/getTool',verifyToken,verifyAdmin, async(req, res)=>{
       const query = req.query;
       const quan = req.body.quantity;
       const tool = await toolsCollection.findOne(query);
@@ -163,7 +208,7 @@ const run = async () => {
 
 
     //delete order by admin
-    app.delete('/deletOrder/:deleteId', async(req, res)=>{
+    app.delete('/deletOrder/:deleteId',verifyToken,verifyAdmin, async(req, res)=>{
       const id = req.params.deleteId;
       const query = {_id:ObjectId(id)};
       const result = await purchasedCollection.deleteOne(query);
@@ -171,7 +216,7 @@ const run = async () => {
     })
 
     //post data to purchased collection
-    app.post('/purchased', async(req, res)=>{
+    app.post('/purchased', verifyToken,async(req, res)=>{
       const toolData = req.body;
       const result = await purchasedCollection.insertOne(toolData);
       res.send(result)
@@ -220,7 +265,7 @@ const run = async () => {
     })
 
     //delete purchased product
-    app.delete('/purchasedSingle/:productId',async(req, res)=>{
+    app.delete('/purchasedSingle/:productId',verifyToken,async(req, res)=>{
       const id = req.params.productId;
       const query = {_id:ObjectId(id)};
       const result = await purchasedCollection.deleteOne(query);
@@ -228,7 +273,7 @@ const run = async () => {
     })
 
     //post data to review collection
-    app.post('/review', async(req, res)=>{
+    app.post('/review',verifyToken, async(req, res)=>{
       const data = req.body;
       const result = await reviewCollection.insertOne(data);
       res.send(result);
@@ -243,13 +288,13 @@ const run = async () => {
     });
 
     //get all users
-    app.get('/allUsers', async(req, res)=>{
+    app.get('/allUsers',verifyToken,verifyAdmin, async(req, res)=>{
       const query = {};
       const users = await userCollection.find(query).toArray();
       res.send(users)
     })
 
-
+    
 
   } finally {
 
