@@ -139,7 +139,8 @@ const run = async () => {
     //get all tools
     app.get('/getTools', async(req, res)=>{
       const query = {};
-      const tools = await toolsCollection.find(query).toArray();
+      const homeTools = await toolsCollection.find(query).toArray();
+      const tools = homeTools.reverse() 
       res.send(tools);
     })
     //get admin tools
